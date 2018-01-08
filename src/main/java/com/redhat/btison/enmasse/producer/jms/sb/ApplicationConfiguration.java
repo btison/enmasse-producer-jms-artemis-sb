@@ -1,14 +1,12 @@
 package com.redhat.btison.enmasse.producer.jms.sb;
 
 import javax.jms.ConnectionFactory;
-import javax.jms.JMSException;
 
 import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.connection.CachingConnectionFactory;
-import org.springframework.jms.core.JmsTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
@@ -39,14 +37,6 @@ public class ApplicationConfiguration {
         CachingConnectionFactory ccf = new CachingConnectionFactory(cf);
         ccf.setSessionCacheSize(sessionCacheSize);
         return ccf;
-    }
-
-    @Bean
-    JmsTemplate jmsTemplate(ConnectionFactory cf) throws JMSException {
-        JmsTemplate jmsTemplate = new JmsTemplate(cf);
-        jmsTemplate.setExplicitQosEnabled(true);
-        return jmsTemplate;
-
     }
 
     public void setUrl(String url) {
